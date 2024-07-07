@@ -1,7 +1,28 @@
-export const MachineCard = () => {
+import './MachineCard.css'
+
+import {Pie} from 'react-chartjs-2';
+import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
+import { pieChartData } from '../../DATA.js';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+export const MachineCard = (props) => {
+
+    const options = {};
+
     return (
-        <div>
-            <h4>Machine Card</h4>
+        <div className="container">
+            <h2>Machine: {props.machine}</h2>
+            <div className="data-container">
+                <div className="data">
+                    <p>X hours run</p>
+                    <p>Y hours down-time</p>
+                    <p>Z % run-time</p>
+                </div>
+                <div className="pie-chart">
+                    <Pie options={options} data={pieChartData}/>
+                </div>
+            </div>
         </div>
     );
 }

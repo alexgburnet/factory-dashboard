@@ -12,7 +12,7 @@ export const OverviewBarChart = () => {
 
     return (
         <div>
-            <Bar options={options} data={barChartData}/>
+            <Bar options={options} data={barChartData} className='bar-chart'/>
         </div>
     );
 }

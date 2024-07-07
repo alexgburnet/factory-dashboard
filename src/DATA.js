@@ -20,3 +20,21 @@ export const barChartData = {
         }
     },
 };
+
+export const pieChartData = {
+    labels: ["Warp Off", "Maintenance", "Piece Change", "End Out Bar 2", "Knitting Elements"],
+    datasets: [
+        {
+            label: "Time Spent",
+            data: [120, 60, 30, 90, 45],
+            backgroundColor: [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "orange",
+            ],
+            hoverOffset: 4,
+        }
+    ]
+};
