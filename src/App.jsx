@@ -1,7 +1,7 @@
 import './App.css'
-import { NavBar } from './Components/NavBar'
-import { OverviewBarChart } from './Components/OverviewBarChart'
-import { MachineCard } from './Components/MachineCard'
+import { NavBar } from './Components/NavBar/NavBar'
+import { OverviewBarChart } from './Components/OverviewBarChart/OverviewBarChart'
+import { MachineCard } from './Components/MachineCard/MachineCard'
 
 function App() {
 
