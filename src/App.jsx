@@ -1,14 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { NavBar } from './Components/NavBar'
+import { OverviewBarChart } from './Components/OverviewBarChart'
+import { MachineCard } from './Components/MachineCard'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      
+      <NavBar />
+      <OverviewBarChart />
+      <div>
+        <MachineCard />
+        <MachineCard />
+        <MachineCard />
+        <MachineCard />
+      </div>
     </>
   )
 }
