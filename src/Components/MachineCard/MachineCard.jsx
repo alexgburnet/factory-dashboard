@@ -8,15 +8,25 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const MachineCard = (props) => {
 
-    const options = {};
+    const options = {
+        repsonsive: true,
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: {
+                    boxWidth: 10,
+                },
+            }
+        }
+    };
 
     return (
         <div className="container">
-            <h2>Machine: {props.machine}</h2>
             <div className="data-container">
                 <div className="data">
+                    <h2>Machine: {props.machine}</h2>
                     <p>X hours run</p>
-                    <p>Y hours down-time</p>
+                    <p>Y hours down</p>
                     <p>Z % run-time</p>
                 </div>
                 <div className="pie-chart">
