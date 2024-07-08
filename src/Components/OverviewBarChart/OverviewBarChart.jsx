@@ -3,8 +3,6 @@ import {Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 
-import {barChartData} from '../../DATA.js';
-
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
 export const OverviewBarChart = () => {
