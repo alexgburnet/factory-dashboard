@@ -2,7 +2,6 @@ import './MachineCard.css'
 
 import {Pie} from 'react-chartjs-2';
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
-import { pieChartData } from '../../DATA.js';
 import axios from 'axios';
 
 import {useEffect, useState} from 'react';
