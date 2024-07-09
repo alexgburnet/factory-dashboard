@@ -26,12 +26,23 @@ export const OverviewBarChart = () => {
         return <div>Loading...</div>;
     }
 
+    const getColor = (value) => {
+        if (value >= 80) {
+            return 'green';
+        } else if (value >= 50) {
+            return 'orange';
+        } else {
+            return 'red';
+        }
+    };
+
+
     const barChartData = {
         labels: overviewData.machines.numbers,
         datasets: [
             {
                 data: overviewData.machines.percentRun,
-                backgroundColor: ["green", "green", "orange", "red", "red", "red", "orange", "red"],
+                backgroundColor: overviewData.machines.percentRun.map(getColor),
                 borderWidth: 1,
             },
         ],
