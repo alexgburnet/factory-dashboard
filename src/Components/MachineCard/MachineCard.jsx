@@ -4,7 +4,9 @@ import {Pie} from 'react-chartjs-2';
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
 import axios from 'axios';
 
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
+
+import {DateContext} from '../../DateContext';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -12,15 +14,19 @@ export const MachineCard = (props) => {
 
     const [machineData, setMachineData] = useState(null);
 
+    const { selectedDate } = useContext(DateContext);
+
+    const date = formatDateToDDMMYYYY(selectedDate);
+
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/machine?machineNumber=${props.machine}`)
+        axios.get(`http://localhost:8080/api/machine?machineNumber=${props.machine}&date=${date}`)
             .then((response) => {
                 setMachineData(response.data);
             })
             .catch((error) => {
                 console.error(error);
             });
-    }, []);
+    }, [selectedDate]);
 
     if (machineData === null) {
         return <div>Loading...</div>;
@@ -76,7 +82,7 @@ export const MachineCard = (props) => {
         <div className="container">
             <div className="data-container">
                 <div className="data">
-                    <h2>Machine: {props.machine}</h2>
+                    <h2>Machine {props.machine}</h2>
                     <p>{(24 - machineData.totalDownTime).toFixed(1)} hours run</p>
                     <p>{machineData.totalDownTime.toFixed(1)} hours down</p>
                     <p>{((24 - machineData.totalDownTime) / 24 * 100).toFixed(1)}% run-time</p>
@@ -88,3 +94,11 @@ export const MachineCard = (props) => {
         </div>
     );
 }
+
+const formatDateToDDMMYYYY = (date) => {
+    const day = parseInt(date.getDate());
+    const month = parseInt(date.getMonth() + 1);
+    const year = date.getFullYear().toString();
+
+    return `${day}.${month}.${year}`;
+};

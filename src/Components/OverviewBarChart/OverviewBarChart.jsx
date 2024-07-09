@@ -1,7 +1,8 @@
 import {Bar} from 'react-chartjs-2';
 import {Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, plugins, scales, Ticks} from 'chart.js';
 import axios from 'axios';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
+import {DateContext} from '../../DateContext';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
@@ -10,8 +11,11 @@ export const OverviewBarChart = () => {
     const [overviewData, setOverviewData] = useState(null);
     const [error, setError] = useState(null);
 
+    const { selectedDate } = useContext(DateContext);
+    const date = formatDateToDDMMYYYY(selectedDate);
+
     useEffect(() => {
-        axios.get('http://localhost:8080/api/overview')
+        axios.get(`http://localhost:8080/api/overview?date=${date}`)
             .then((response) => {
                 setOverviewData(response.data);
                 console.log(response.data.machines.numbers);
@@ -20,7 +24,7 @@ export const OverviewBarChart = () => {
             .catch((error) => {
                 setError(error);
             });
-    }, []);
+    }, [selectedDate]);
 
     if (overviewData === null) {
         return <div>Loading...</div>;
@@ -77,3 +81,11 @@ export const OverviewBarChart = () => {
         </div>
     );
 }
+
+const formatDateToDDMMYYYY = (date) => {
+    const day = parseInt(date.getDate());
+    const month = parseInt(date.getMonth() + 1);
+    const year = date.getFullYear().toString();
+
+    return `${day}.${month}.${year}`;
+};

@@ -2,10 +2,11 @@ import './App.css';
 import { NavBar } from './Components/NavBar/NavBar';
 import { OverviewBarChart } from './Components/OverviewBarChart/OverviewBarChart';
 import { MachineCard } from './Components/MachineCard/MachineCard';
+import { DateProvider } from './DateContext';
 
 function App() {
   return (
-    <>
+    <DateProvider>
       <NavBar />
       <div className="chart-container">
         <OverviewBarChart />
@@ -20,7 +21,7 @@ function App() {
         <MachineCard machine={27}/>
         <MachineCard machine={28}/>
       </div>
-    </>
+    </DateProvider>
   );
 }
 
