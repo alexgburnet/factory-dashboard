@@ -73,16 +73,14 @@ export const MachineCard = (props) => {
         }
     };
 
-    
-
     return (
         <div className="container">
             <div className="data-container">
                 <div className="data">
                     <h2>Machine: {props.machine}</h2>
-                    <p>X hours run</p>
-                    <p>Y hours down</p>
-                    <p>Z % run-time</p>
+                    <p>{(24 - machineData.totalDownTime).toFixed(1)} hours run</p>
+                    <p>{machineData.totalDownTime.toFixed(1)} hours down</p>
+                    <p>{((24 - machineData.totalDownTime) / 24 * 100).toFixed(1)}% run-time</p>
                 </div>
                 <div className="pie-chart">
                     <Pie options={options} data={pieChartData}/>
