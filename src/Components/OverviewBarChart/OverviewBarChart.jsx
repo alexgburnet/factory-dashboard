@@ -45,7 +45,7 @@ export const OverviewBarChart = () => {
     const getColor = (value) => {
         if (value >= 80) {
             return 'green';
-        } else if (value >= 50) {
+        } else if (value >= 70) {
             return 'orange';
         } else {
             return 'red';

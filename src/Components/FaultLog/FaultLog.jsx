@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
 import { NavBar } from '../NavBar/NavBar';
 import axios from 'axios';
 import {DateContext} from '../../DateContext';
@@ -21,7 +20,6 @@ export const FaultLog = (props) => {
     const [columnDefs, setColumnDefs] = useState([]);
 
     const date = formatDateToDDMMYYYY(selectedDate);
-      
 
     useEffect(() => {
         axios.get(`${API_URL}/api/faultLog?machineNumber=${machineNo}&date=${date}`)
@@ -56,7 +54,7 @@ export const FaultLog = (props) => {
     }
 
     return (
-        <div className="ag-theme-alpine" style={{ height: '600px', width: '100vw' }}>
+        <div className="ag-theme-alpine" style={{width: '100vw' }}>
             <AgGridReact
             rowData={rowData}
             columnDefs={columnDefs}

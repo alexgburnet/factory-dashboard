@@ -9,6 +9,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Using Alpine theme for Ag-Grid
 import { FaultLog } from '../FaultLog/FaultLog';
+import { FaultReport } from '../FaultReport/FaultReport';
 
 export const MachineSpecifics = () => {
     const { machineNo } = useParams();
@@ -16,19 +17,13 @@ export const MachineSpecifics = () => {
 
   return (
     <div>
-      <NavBar />
-      <h1>Machine {machineNo} Fault Log:</h1>
+        <NavBar />
+        <h1>Machine {machineNo} Fault Report:</h1>
+        <FaultReport machineNo={machineNo}/>
 
-      <FaultLog machineNo={machineNo}/>
-      
+        <h1>Machine {machineNo} Fault Log:</h1>
+        <FaultLog machineNo={machineNo}/>
+
     </div>
   );
-}
-
-const formatDateToDDMMYYYY = (date) => {
-    const day = parseInt(date.getDate());
-    const month = parseInt(date.getMonth() + 1);
-    const year = date.getFullYear().toString();
-
-    return `${day}.${month}.${year}`;
 };
