@@ -3,69 +3,24 @@ import { useParams } from 'react-router-dom';
 import { NavBar } from '../NavBar/NavBar';
 import axios from 'axios';
 import {DateContext} from '../../DateContext';
+import API_URL from '../../config';
 
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Using Alpine theme for Ag-Grid
+import { FaultLog } from '../FaultLog/FaultLog';
 
 export const MachineSpecifics = () => {
     const { machineNo } = useParams();
-    const { selectedDate } = useContext(DateContext);
-
-    const [machineData, setMachineData] = useState(null);
-    const [error, setError] = useState(null);
-    const [rowData, setRowData] = useState([]);
-    const [columnDefs, setColumnDefs] = useState([]);
-
-    const date = formatDateToDDMMYYYY(selectedDate);
-      
-
-    useEffect(() => {
-        axios.get(`http://localhost:8080/api/faultLog?machineNumber=${machineNo}&date=${date}`)
-            .then((response) => {
-                if (response.data.error) {
-                    setError(response.data.error);
-                } else {
-                    setError(null);
-                    setMachineData(response.data);
-                    setRowData(response.data.faultLog);
-                    console.log("row data");
-                    console.log(rowData);
-                    setColumnDefs(response.data.header.map((header) => {
-                        return {field: header };
-                    }));
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-                setError(error);
-            });
-    }, [date]);
-
-    if (error) {
-        return (
-            <div>
-                <NavBar />
-                <h1>Machine {machineNo}</h1>
-                <p>Machine data not available: {error}</p>
-            </div>
-        );
-    } else if (machineData === null) {
-        return <div>Loading...</div>;
-    }
+    
 
   return (
     <div>
       <NavBar />
       <h1>Machine {machineNo} Fault Log:</h1>
 
-      <div className="ag-theme-alpine" style={{ height: '400px', width: '600px' }}>
-        <AgGridReact
-          rowData={rowData}
-          columnDefs={columnDefs}
-          domLayout='autoHeight'
-        />
-      </div>
+      <FaultLog machineNo={machineNo}/>
+      
     </div>
   );
 }

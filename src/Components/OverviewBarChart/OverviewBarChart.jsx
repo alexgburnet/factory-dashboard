@@ -3,6 +3,7 @@ import {Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip
 import axios from 'axios';
 import {useEffect, useState, useContext} from 'react';
 import {DateContext} from '../../DateContext';
+import API_URL from '../../config';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
@@ -15,7 +16,7 @@ export const OverviewBarChart = () => {
     const date = formatDateToDDMMYYYY(selectedDate);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/overview?date=${date}`)
+        axios.get(`${API_URL}/api/overview?date=${date}`)
             .then((response) => {
                 if (response.data.error) {
                     setError(response.data.error);

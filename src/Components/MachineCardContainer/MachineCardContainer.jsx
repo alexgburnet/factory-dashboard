@@ -2,13 +2,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { MachineCard } from '../MachineCard/MachineCard';
+import API_URL from '../../config';
 
 export const MachineCardContainer = () => {
 
     const [machines, setMachines] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/machineNumbers')
+        axios.get(`${API_URL}/api/machineNumbers`)
             .then((response) => {
                 console.log(response.data);
                 setMachines(response.data);

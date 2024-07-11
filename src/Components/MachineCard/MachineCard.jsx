@@ -3,6 +3,7 @@ import './MachineCard.css'
 import {Pie} from 'react-chartjs-2';
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
 import axios from 'axios';
+import API_URL from '../../config';
 
 import {useEffect, useState, useContext} from 'react';
 
@@ -20,7 +21,7 @@ export const MachineCard = (props) => {
     const date = formatDateToDDMMYYYY(selectedDate);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/machineCard?machineNumber=${props.machine}&date=${date}`)
+        axios.get(`${API_URL}/api/machineCard?machineNumber=${props.machine}&date=${date}`)
             .then((response) => {
                 if (response.data.error) {
                     setError(response.data.error);
