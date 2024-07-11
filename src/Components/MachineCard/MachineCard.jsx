@@ -20,7 +20,7 @@ export const MachineCard = (props) => {
     const date = formatDateToDDMMYYYY(selectedDate);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/machine?machineNumber=${props.machine}&date=${date}`)
+        axios.get(`http://localhost:8080/api/machineCard?machineNumber=${props.machine}&date=${date}`)
             .then((response) => {
                 if (response.data.error) {
                     setError(response.data.error);

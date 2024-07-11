@@ -13,6 +13,12 @@
     gap: 10px;
 }
 
+.machine-card-link{
+    text-decoration: none;
+    color: inherit;
+
+}
+
 .chart-container {
     width: 100%;
     height: 40vh;
