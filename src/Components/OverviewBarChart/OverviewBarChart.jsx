@@ -17,16 +17,27 @@ export const OverviewBarChart = () => {
     useEffect(() => {
         axios.get(`http://localhost:8080/api/overview?date=${date}`)
             .then((response) => {
-                setOverviewData(response.data);
-                console.log(response.data.machines.numbers);
-                console.log(response.data.machines.percentRun);
+                if (response.data.error) {
+                    setError(response.data.error);
+                } else {
+                    setOverviewData(response.data);
+                    setError(null);
+                    console.log(response.data.machines.numbers);
+                    console.log(response.data.machines.percentRun);
+                }
             })
             .catch((error) => {
                 setError(error);
             });
     }, [selectedDate]);
 
-    if (overviewData === null) {
+    if (error) {
+        return (
+            <div>
+                <p>Machine Data not available for the selected date</p>
+            </div>
+        );
+    } else if (overviewData === null) {
         return <div>Loading...</div>;
     }
 

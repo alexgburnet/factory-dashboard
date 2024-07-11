@@ -13,6 +13,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export const MachineCard = (props) => {
 
     const [machineData, setMachineData] = useState(null);
+    const [error, setError] = useState(null);
 
     const { selectedDate } = useContext(DateContext);
 
@@ -21,17 +22,36 @@ export const MachineCard = (props) => {
     useEffect(() => {
         axios.get(`http://localhost:8080/api/machine?machineNumber=${props.machine}&date=${date}`)
             .then((response) => {
+                if (response.data.error) {
+                    setError(response.data.error);
+                } else {
+                    setError(null);
+                    setMachineData(response.data);
+                }
+
                 setMachineData(response.data);
             })
             .catch((error) => {
                 console.error(error);
+                return (
+                    <div>
+                        <h2>Machine {props.machine}</h2>
+                        <p>Machine data not available</p>
+                    </div>
+                );
             });
     }, [selectedDate]);
 
-    if (machineData === null) {
+    if (error) {
+        return (
+            <div>
+                <h2>Machine {props.machine}</h2>
+                <p>Machine data not available</p>
+            </div>
+        );
+    } else if (machineData === null) {
         return <div>Loading...</div>;
     }
-
 
     const pieChartData = {
         labels: Object.keys(machineData.downTime),
