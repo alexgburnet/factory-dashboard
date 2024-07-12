@@ -1,4 +1,5 @@
-name: Deploy
+name: Deploy to Raspberry Pi
+
 on:
   push:
     branches:
@@ -32,6 +33,7 @@ jobs:
       uses: appleboy/ssh-action@v0.1.6
       with:
         host: ${{ secrets.RPI_HOST }}
+        port: ${{ secrets.RPI_PORT }}
         username: ${{ secrets.RPI_USER }}
         key: ${{ secrets.RPI_SSH_KEY }}
         script: |
