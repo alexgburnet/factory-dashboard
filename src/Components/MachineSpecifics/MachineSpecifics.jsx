@@ -18,10 +18,11 @@ export const MachineSpecifics = () => {
   return (
     <div>
         <NavBar />
-        <h1>Machine {machineNo} Fault Report:</h1>
+
+        <h1>Fault Report:</h1>
         <FaultReport machineNo={machineNo}/>
 
-        <h1>Machine {machineNo} Fault Log:</h1>
+        <h1>Fault Log:</h1>
         <FaultLog machineNo={machineNo}/>
 
     </div>

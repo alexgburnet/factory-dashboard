@@ -44,8 +44,6 @@ export const FaultLog = (props) => {
     if (error) {
         return (
             <div>
-                <NavBar />
-                <h1>Machine {machineNo}</h1>
                 <p>Machine data not available: {error}</p>
             </div>
         );
