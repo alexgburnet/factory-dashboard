@@ -17,7 +17,7 @@ export const NavBar = () => {
 
     const getHeaderTitle = () => {
         if (location.pathname === "/") {
-            return "General Factory";
+            return "Factory";
         } else {
             return `Machine ${location.pathname.split("/")[2]}`;
         }

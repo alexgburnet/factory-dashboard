@@ -52,7 +52,7 @@ export const FaultLog = (props) => {
     }
 
     return (
-        <div className="ag-theme-alpine" style={{width: '100vw' }}>
+        <div className="ag-theme-alpine" style={{width: '100%' }}>
             <AgGridReact
             rowData={rowData}
             columnDefs={columnDefs}

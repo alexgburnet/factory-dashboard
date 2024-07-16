@@ -70,6 +70,9 @@ export const OverviewBarChart = () => {
             title: {
                 display: true,
                 text: "Percentage Running Time by Machine",
+                font: {
+                    size: 20, // Correct for Chart.js 3+
+                },
             },
             legend: {
                 display: false,
@@ -81,14 +84,25 @@ export const OverviewBarChart = () => {
                 max: 100,
                 ticks: {
                     stepSize: 20,
+                    font: {
+                        size: 15, // Correct for Chart.js 3+
+                    },
                 },
-            }
-        }
+            },
+            x: {
+                ticks: {
+                    font: {
+                        size: 17, // Correct for Chart.js 3+
+                    },
+                },
+            },
+        },
     };
+    
 
 
     return (
-        <div>
+        <div className='bar-chart-container'>
             <Bar options={options} data={barChartData} className='bar-chart'/>
         </div>
     );

@@ -100,7 +100,7 @@ export const MachineCard = (props) => {
     };
 
     return (
-        <div className="container">
+        <div className="machine-card">
             <div className="data-container">
                 <div className="data">
                     <h2>Machine {props.machine}</h2>
