@@ -8,6 +8,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { enGB } from "date-fns/locale";
 
 import { DateContext } from "../../DateContext";
+import { FaHome } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+
 
 export const NavBar = () => {
 
@@ -25,13 +28,21 @@ export const NavBar = () => {
 
     return (
         <div className="header">
+          <Link to="/" className="navbar-link">
+            <FaHome className="icon" size={30} /> {/* Home icon */}
+          </Link>
+    
+          <div className="center-container">
             <h1>{getHeaderTitle()} Overview for:</h1>
             <DatePicker
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
-                dateFormat="dd/MM/yyyy"  // British date format
-                locale={enGB}            // British locale
+              className="date-picker"
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              dateFormat="dd/MM/yyyy"  // British date format
+              locale={enGB}            // British locale
             />
+          </div>
         </div>
-    );
+      );
+    
 };

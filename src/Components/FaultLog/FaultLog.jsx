@@ -31,7 +31,7 @@ export const FaultLog = (props) => {
                     setMachineData(response.data);
                     setRowData(response.data.faultLog);
                     setColumnDefs(response.data.header.map((header) => {
-                        return {field: header };
+                        return {field: header};
                     }));
                 }
             })
