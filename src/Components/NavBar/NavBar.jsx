@@ -29,7 +29,7 @@ export const NavBar = () => {
     return (
         <div className="header">
           <Link to="/" className="navbar-link">
-            <FaHome className="icon" size={30} /> {/* Home icon */}
+            <FaHome className="icon" size={35} /> {/* Home icon */}
           </Link>
     
           <div className="center-container">
@@ -42,7 +42,10 @@ export const NavBar = () => {
               locale={enGB}            // British locale
             />
           </div>
+
+
+          <img src="/public/AburnetLogo.jpg" alt="ABurnet Logo" className="logo"/>
+
         </div>
-      );
-    
+      );  
 };

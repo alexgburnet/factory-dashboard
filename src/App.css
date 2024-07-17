@@ -114,3 +114,10 @@
 .date-picker {
     margin-top: 5px;
 }
+
+.logo {
+    max-width: 10%; /* Make the logo responsive */
+    max-height: 100%; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image fits without distortion */
+    padding-right: 20px;
+}
