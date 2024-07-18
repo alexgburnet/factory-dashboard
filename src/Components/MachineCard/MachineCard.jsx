@@ -8,8 +8,11 @@ import API_URL from '../../config';
 import {useEffect, useState, useContext} from 'react';
 
 import {DateContext} from '../../DateContext';
+import { ShiftContext } from '../../ShiftContext';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+
+import {formatDateToYYYYMMDD} from '../../utilities/dateUtils';
 
 export const MachineCard = (props) => {
 
@@ -17,11 +20,12 @@ export const MachineCard = (props) => {
     const [error, setError] = useState(null);
 
     const { selectedDate } = useContext(DateContext);
+    const {isDayShift} = useContext(ShiftContext);
 
-    const date = formatDateToDDMMYYYY(selectedDate);
+    const date = formatDateToYYYYMMDD(selectedDate);
 
     useEffect(() => {
-        axios.get(`${API_URL}/api/machineCard?machineNumber=${props.machine}&date=${date}`)
+        axios.get(`${API_URL}/api/machineCard?machineNumber=${props.machine}&date=${date}&shift=${isDayShift ? 'day' : 'night'}`)
             .then((response) => {
                 if (response.data.error) {
                     setError(response.data.error);
@@ -41,7 +45,7 @@ export const MachineCard = (props) => {
                     </div>
                 );
             });
-    }, [selectedDate]);
+    }, [selectedDate, isDayShift]);
 
     if (error) {
         return (
@@ -115,11 +119,3 @@ export const MachineCard = (props) => {
         </div>
     );
 }
-
-const formatDateToDDMMYYYY = (date) => {
-    const day = parseInt(date.getDate());
-    const month = parseInt(date.getMonth() + 1);
-    const year = date.getFullYear().toString();
-
-    return `${day}.${month}.${year}`;
-};

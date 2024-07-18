@@ -3,7 +3,11 @@ import {Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip
 import axios from 'axios';
 import {useEffect, useState, useContext} from 'react';
 import {DateContext} from '../../DateContext';
+import { ShiftContext } from '../../ShiftContext';
 import API_URL from '../../config';
+
+import {formatDateToYYYYMMDD} from '../../utilities/dateUtils';
+
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
@@ -11,12 +15,13 @@ export const OverviewBarChart = () => {
 
     const [overviewData, setOverviewData] = useState(null);
     const [error, setError] = useState(null);
+    const {isDayShift} = useContext(ShiftContext);
 
     const { selectedDate } = useContext(DateContext);
-    const date = formatDateToDDMMYYYY(selectedDate);
+    const date = formatDateToYYYYMMDD(selectedDate);
 
     useEffect(() => {
-        axios.get(`${API_URL}/api/overview?date=${date}`)
+        axios.get(`${API_URL}/api/overview?date=${date}&shift=${isDayShift ? 'day' : 'night'}`)
             .then((response) => {
                 if (response.data.error) {
                     setError(response.data.error);
@@ -30,7 +35,7 @@ export const OverviewBarChart = () => {
             .catch((error) => {
                 setError(error);
             });
-    }, [selectedDate]);
+    }, [selectedDate, isDayShift]);
 
     if (error) {
         return (
@@ -108,10 +113,3 @@ export const OverviewBarChart = () => {
     );
 }
 
-const formatDateToDDMMYYYY = (date) => {
-    const day = parseInt(date.getDate());
-    const month = parseInt(date.getMonth() + 1);
-    const year = date.getFullYear().toString();
-
-    return `${day}.${month}.${year}`;
-};

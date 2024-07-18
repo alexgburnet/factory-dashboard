@@ -10,6 +10,7 @@ import { enGB } from "date-fns/locale";
 import { DateContext } from "../../DateContext";
 import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { DayNightToggle } from "../DayNightToggle/DayNightToggle";
 
 
 export const NavBar = () => {
@@ -42,9 +43,9 @@ export const NavBar = () => {
               locale={enGB}            // British locale
             />
           </div>
-
-
-          <img src="/public/AburnetLogo.jpg" alt="ABurnet Logo" className="logo"/>
+          
+          <DayNightToggle />
+          <img src="/AburnetLogo.jpg" alt="ABurnet Logo" className="logo"/>
 
         </div>
       );  
