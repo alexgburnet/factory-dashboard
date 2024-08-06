@@ -19,9 +19,9 @@ const PasswordProtect = ({ children, onPasswordCorrect }) => {
   };
 
   return (
-    <div>
+    <div className="password-protect-container">
       <h2>Enter Password</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="password-protect-form" onSubmit={handleSubmit}>
         <input
           type="password"
           value={password}
@@ -29,7 +29,7 @@ const PasswordProtect = ({ children, onPasswordCorrect }) => {
           placeholder="Password"
         />
         <button type="submit">Submit</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p className="error-message">{error}</p>}
       </form>
     </div>
   );

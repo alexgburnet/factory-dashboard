@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { enGB } from "date-fns/locale";
 
 import { DateContext } from "../../DateContext";
-import { FaHome } from 'react-icons/fa';
+import { FaCog, FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { DayNightToggle } from "../DayNightToggle/DayNightToggle";
 
@@ -31,6 +31,10 @@ export const NavBar = () => {
         <div className="header">
           <Link to="/" className="navbar-link">
             <FaHome className="icon" size={35} /> {/* Home icon */}
+          </Link>
+
+          <Link to="/controlpanel" className="navbar-link">
+            <FaCog className="icon" size={35} /> {/* Control Panel icon */}
           </Link>
     
           <div className="center-container">
