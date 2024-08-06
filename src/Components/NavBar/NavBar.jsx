@@ -1,3 +1,5 @@
+import "./NavBar.css";
+
 import React, { useState, useContext } from "react";
 import DatePicker from "react-datepicker";
 

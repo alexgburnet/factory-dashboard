@@ -4,6 +4,7 @@ import axios from 'axios';
 import {DateContext} from '../../DateContext';
 import { ShiftContext } from '../../ShiftContext';
 import API_URL from '../../config';
+import './FaultLog.css';
 
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';

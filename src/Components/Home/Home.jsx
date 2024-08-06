@@ -1,3 +1,5 @@
+import './Home.css';
+
 import { NavBar } from '../NavBar/NavBar';
 import { OverviewBarChart } from '../OverviewBarChart/OverviewBarChart';
 import { MachineCardContainer } from '../MachineCardContainer/MachineCardContainer';

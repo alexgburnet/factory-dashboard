@@ -1,0 +1,11 @@
+.chart-container {
+    width: 100%;
+    height: 40vh;
+    margin-bottom: 20px;
+}
+
+.machine-card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    gap: 10px;
+}

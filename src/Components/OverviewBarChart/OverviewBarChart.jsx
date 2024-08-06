@@ -1,3 +1,5 @@
+import './OverviewBarChart.css';
+
 import {Bar} from 'react-chartjs-2';
 import {Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, plugins, scales, Ticks} from 'chart.js';
 import axios from 'axios';
