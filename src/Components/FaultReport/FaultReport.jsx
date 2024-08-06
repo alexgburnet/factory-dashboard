@@ -30,15 +30,21 @@ export const FaultReport = (props) => {
             .then((response) => {
                 if (response.data.error) {
                     setError(response.data.error);
-                } else if (response === null) {
+                } else if (response === null || response === undefined) {
                     setError('No data available');
                 } else {
                     setError(null);
                     setMachineData(response.data);
                     setRowData(response.data.faultReport);
-                    setColumnDefs(Object.keys(response.data.faultReport[0]).map((header) => {
-                        return {field: header };
-                    }));
+
+                    if (response.data.faultReport.length > 0) {
+                        setColumnDefs(Object.keys(response.data.faultReport[0]).map((header) => {
+                            return {field: header };
+                        }));
+                    } else {
+                        setColumnDefs([]);
+                    }
+                    
                 }
             })
             .catch((error) => {
