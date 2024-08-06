@@ -39,7 +39,7 @@ export const FaultReport = (props) => {
 
                     if (response.data.faultReport.length > 0) {
                         setColumnDefs(Object.keys(response.data.faultReport[0]).map((header) => {
-                            return {field: header };
+                            return {field: header, flex: 1};
                         }));
                     } else {
                         setColumnDefs([]);
