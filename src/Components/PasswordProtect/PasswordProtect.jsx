@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
+import passwords from '../../../passwords';
+
 import './PasswordProtect.css';
 
 const PasswordProtect = ({ children, onPasswordCorrect }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const correctPassword = 'your-password'; // temporary!
+
+  const correctPassword = passwords.CONTROL_PANEL_PASSWORD;
 
   const handleSubmit = (e) => {
     e.preventDefault();
