@@ -42,28 +42,59 @@ export const ControlPanel = () => {
             alert('Please fill in all fields');
             return;
         }
-
+    
         const newMachineData = {
             operator: operators.find(op => op.id === selectedOperator).id,
             date: selectedDate,
             shift: selectedShift,
             machines: selectedMachines
         };
-
-        setMachineData(newMachineData);
-
-        try {
-            axios.post(`${API_URL}/api/setAccountableKnitter`, newMachineData)
-                .then((response) => {
-                    console.log('Shift data submitted:', response.data);
-                })
-                .catch((error) => {
-                    console.error('API error:', error);
-                });
-        } catch (error) {
-            console.error('API error:', error);
-        }
+    
+        // Step 1: Check if machines are already assigned
+        axios.get(`${API_URL}/api/checkAccountableKnitter?date=${selectedDate}&shift=${selectedShift}&machines=${selectedMachines.join(',')}`)
+            .then((response) => {
+                const existingAssignments = response.data;
+    
+                // Step 2: Prepare a message to show if there are existing assignments
+                const assignedMachines = Object.keys(existingAssignments).filter(machineId => selectedMachines.includes(machineId));
+                
+                if (assignedMachines.length > 0) {
+                    const assignmentDetails = assignedMachines.map(machineId => 
+                        `Machine ${machineId}: ${existingAssignments[machineId]}`
+                    ).join('\n');
+    
+                    const message = `The following machines are already assigned:\n${assignmentDetails}\n\nDo you want to overwrite these assignments?`;
+    
+                    if (window.confirm(message)) {
+                        // Step 3: Proceed with overwriting
+                        axios.post(`${API_URL}/api/setAccountableKnitter`, newMachineData)
+                            .then((response) => {
+                                console.log('Shift data submitted:', response.data);
+                                alert('Assignment updated successfully!');
+                            })
+                            .catch((error) => {
+                                console.error('API error:', error);
+                            });
+                    } else {
+                        alert('Assignment not updated.');
+                    }
+                } else {
+                    // No existing assignment, proceed with posting new data
+                    axios.post(`${API_URL}/api/setAccountableKnitter`, newMachineData)
+                        .then((response) => {
+                            console.log('Shift data submitted:', response.data);
+                            alert('Assignment added successfully!');
+                        })
+                        .catch((error) => {
+                            console.error('API error:', error);
+                        });
+                }
+            })
+            .catch((error) => {
+                console.error('API error:', error);
+            });
     };
+    
 
     const handleMachineChange = (event) => {
         const value = event.target.value;
