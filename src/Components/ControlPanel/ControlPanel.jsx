@@ -1,6 +1,9 @@
 import API_URL from '../../config';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './ControlPanel.css';
+import { FaCog, FaHome } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export const ControlPanel = () => {
     const [operators, setOperators] = useState([]);
@@ -105,9 +108,15 @@ export const ControlPanel = () => {
 
     return (
         <>
-            <h1>Control Panel</h1>
-            <div>
+            <div className='home-icon-container'>
+                <Link to="/" className="navbar-link">
+                    <FaHome className="icon" size={35} /> {/* Home icon */}
+                </Link>
+            </div>
+            <div className="control-panel-container">
+                <h1>Control Panel</h1>
                 <h2>Input Knitter for Shift</h2>
+                
                 <select onChange={(e) => setSelectedOperator(e.target.value)}>
                     <option value="">Select Operator</option>
                     {operators.map((operator) => (
@@ -143,4 +152,5 @@ export const ControlPanel = () => {
             </div>
         </>
     );
+
 };
