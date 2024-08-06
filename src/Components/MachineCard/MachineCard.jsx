@@ -13,11 +13,13 @@ import { ShiftContext } from '../../ShiftContext';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 import {formatDateToYYYYMMDD} from '../../utilities/dateUtils';
+import { set } from 'date-fns';
 
 export const MachineCard = (props) => {
 
     const [machineData, setMachineData] = useState(null);
     const [error, setError] = useState(null);
+    const [accountableKnitter, setAccountableKnitter] = useState(null);
 
     const { selectedDate } = useContext(DateContext);
     const {isDayShift} = useContext(ShiftContext);
@@ -44,6 +46,22 @@ export const MachineCard = (props) => {
                         <p>Machine data not available</p>
                     </div>
                 );
+            });
+    }, [selectedDate, isDayShift]);
+
+    useEffect(() => {
+        axios.get(`${API_URL}/api/checkAccountableKnitter?date=${date}&shift=${isDayShift ? 'day' : 'night'}&machines=${props.machine}`)
+            .then((response) => {
+                const data = response.data;
+                if (data["-1"]) {
+                    setAccountableKnitter(data["-1"]); // No knitter found
+                } else {
+                    const knitter = Object.keys(data).length ? `${data[props.machine]}` : "Not Assigned";
+                    setAccountableKnitter(knitter);
+                }
+            })
+            .catch((error) => {
+                setAccountableKnitter("Not Assigned");
             });
     }, [selectedDate, isDayShift]);
 
@@ -107,7 +125,7 @@ export const MachineCard = (props) => {
         <div className="machine-card">
             <div className="data-container">
                 <div className="data">
-                    <h2>Machine {props.machine}</h2>
+                    <h2>Machine {props.machine}: {accountableKnitter}</h2>
                     <p>{(24 - machineData.totalDownTime).toFixed(1)} hours run</p>
                     <p>{machineData.totalDownTime.toFixed(1)} hours down</p>
                     <p>{((24 - machineData.totalDownTime) / 24 * 100).toFixed(1)}% run-time</p>
