@@ -16,7 +16,7 @@ export const ControlPanel = () => {
     const [machineData, setMachineData] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/operators')
+        axios.get(`${API_URL}/api/operators`)
             .then((response) => {
                 const transformedOperators = Object.keys(response.data).map(key => ({
                     id: key,
