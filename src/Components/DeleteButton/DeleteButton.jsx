@@ -3,9 +3,8 @@ import React from 'react';
 
 const DeleteButton = (props) => {
   const handleClick = () => {
-    // You can call your API or perform other actions here.
     if (props.onDelete) {
-      props.onDelete(props.data); // Placeholder for actual delete logic
+      props.onDelete(props.data);
     }
   };
 

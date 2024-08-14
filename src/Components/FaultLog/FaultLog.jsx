@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { DateContext } from '../../DateContext';
 import { ShiftContext } from '../../ShiftContext';
+import { FaultDataContext } from '../../FaultDataContext';
 import API_URL from '../../config';
 import './FaultLog.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
@@ -9,6 +10,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { formatDateToYYYYMMDD } from '../../utilities/dateUtils';
+import { set } from 'date-fns';
 
 // Define a factory function for cellRenderer
 const deleteButtonRenderer = (params) => {
@@ -22,8 +24,10 @@ const deleteButtonRenderer = (params) => {
 
 export const FaultLog = (props) => {
   const machineNo = props.machineNo;
-  const { selectedDate } = useContext(DateContext);
+  const { selectedDate, setSelectedDate } = useContext(DateContext);
   const { isDayShift } = useContext(ShiftContext);
+
+  const { updateTime, setUpdateTime } = useContext(FaultDataContext);
 
   const [rowData, setRowData] = useState([]);
   const [columnDefs, setColumnDefs] = useState([]);
@@ -32,6 +36,11 @@ export const FaultLog = (props) => {
   const date = formatDateToYYYYMMDD(selectedDate);
 
   useEffect(() => {
+    fetchdata();
+  }, [date, isDayShift, machineNo]);
+
+  const fetchdata = () => {
+    setUpdateTime(new Date());
     axios.get(`${API_URL}/api/faultLog?machineNumber=${machineNo}&date=${date}&shift=${isDayShift ? 'day' : 'night'}`)
       .then((response) => {
         if (response.data.error) {
@@ -64,12 +73,18 @@ export const FaultLog = (props) => {
         console.error('API Error:', error);
         setError('Failed to fetch data');
       });
-  }, [date, isDayShift, machineNo]);
+  }
 
   const handleDelete = (row) => {
-    console.log('Delete button clicked for row:', row);
-    // Placeholder for API call and table refresh logic
-    // You will need to contact your API and then refresh the table
+    
+    const date = row.Date;
+
+    axios.post(`${API_URL}/api/removeFault`, {
+        machineNumber: machineNo,
+        date: date
+    }).then(fetchdata).catch((error) => {
+        alert('Failed to delete record');
+    });
   };
 
   if (error) {

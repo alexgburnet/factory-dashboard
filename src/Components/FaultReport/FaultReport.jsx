@@ -4,6 +4,7 @@ import { NavBar } from '../NavBar/NavBar';
 import axios from 'axios';
 import {DateContext} from '../../DateContext';
 import { ShiftContext } from '../../ShiftContext';
+import { FaultDataContext } from '../../FaultDataContext';
 import API_URL from '../../config';
 
 import { AgGridReact } from 'ag-grid-react';
@@ -22,6 +23,8 @@ export const FaultReport = (props) => {
     const [error, setError] = useState(null);
     const [rowData, setRowData] = useState([]);
     const [columnDefs, setColumnDefs] = useState([]);
+
+    const { updateTime, setUpdateTime } = useContext(FaultDataContext);
 
     const date = formatDateToYYYYMMDD(selectedDate);
 
@@ -51,7 +54,7 @@ export const FaultReport = (props) => {
                 console.error(error);
                 setError(error);
             });
-    }, [date, isDayShift]);
+    }, [date, isDayShift, machineNo, updateTime]);
 
     if (error) {
         return (
