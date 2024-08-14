@@ -26,3 +26,11 @@
     height: auto; /* Allow height to adjust according to width */
     margin-left: 20px; /* Space between data and pie chart */
   }
+
+
+@media print {
+    .machine-card {
+        border: 1px solid rgb(230, 230, 230);
+        box-shadow: none;
+    }
+}
