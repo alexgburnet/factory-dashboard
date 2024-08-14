@@ -1,75 +1,88 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { NavBar } from '../NavBar/NavBar';
 import axios from 'axios';
-import {DateContext} from '../../DateContext';
+import { DateContext } from '../../DateContext';
 import { ShiftContext } from '../../ShiftContext';
 import API_URL from '../../config';
 import './FaultLog.css';
-
+import DeleteButton from '../DeleteButton/DeleteButton';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css'; // Using Alpine theme for Ag-Grid
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+import { formatDateToYYYYMMDD } from '../../utilities/dateUtils';
 
-import {formatDateToYYYYMMDD} from '../../utilities/dateUtils';
-
+// Define a factory function for cellRenderer
+const deleteButtonRenderer = (params) => {
+  return (
+    <DeleteButton
+      data={params.data}
+      onDelete={() => params.context.onDelete(params.data)}
+    />
+  );
+};
 
 export const FaultLog = (props) => {
-    const machineNo = props.machineNo;
+  const machineNo = props.machineNo;
+  const { selectedDate } = useContext(DateContext);
+  const { isDayShift } = useContext(ShiftContext);
 
-    const { selectedDate } = useContext(DateContext);
-    const {isDayShift} = useContext(ShiftContext);
+  const [rowData, setRowData] = useState([]);
+  const [columnDefs, setColumnDefs] = useState([]);
+  const [error, setError] = useState(null);
 
-    const [machineData, setMachineData] = useState(null);
-    const [error, setError] = useState(null);
-    const [rowData, setRowData] = useState([]);
-    const [columnDefs, setColumnDefs] = useState([]);
+  const date = formatDateToYYYYMMDD(selectedDate);
 
-    const date = formatDateToYYYYMMDD(selectedDate);
+  useEffect(() => {
+    axios.get(`${API_URL}/api/faultLog?machineNumber=${machineNo}&date=${date}&shift=${isDayShift ? 'day' : 'night'}`)
+      .then((response) => {
+        if (response.data.error) {
+          setError(response.data.error);
+        } else {
+          setRowData(response.data.faultLog);
 
-    useEffect(() => {
-        axios.get(`${API_URL}/api/faultLog?machineNumber=${machineNo}&date=${date}&shift=${isDayShift ? 'day' : 'night'}`)
-            .then((response) => {
-                if (response.data.error) {
-                    setError(response.data.error);
-                } else if (response === null || response === undefined) {
-                    setError('No data available');
-                }else {
-                    setError(null);
-                    setMachineData(response.data);
-                    setRowData(response.data.faultLog);
-                    if (response.data.faultLog.length > 0) {
-                        setColumnDefs(response.data.headers.map((header) => {
-                            return {field: header, flex: 1};
-                        }));
-                    } else {
-                        setColumnDefs([]);
-                    }
-                    
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-                setError(error);
-            });
-    }, [date, isDayShift]);
+          const columns = response.data.headers.map((header) => ({
+            field: header,
+            flex: 1
+          }));
 
-    if (error) {
-        return (
-            <div>
-                <p>Machine data not available: {error}</p>
-            </div>
-        );
-    } else if (machineData === null) {
-        return <div>Loading...</div>;
-    }
+          columns.push({
+            headerName: 'Delete',
+            field: 'delete',
+            flex: 0.25,
+            cellRenderer: deleteButtonRenderer, // Use cellRenderer instead of cellRendererFramework
+            cellRendererParams: {
+              context: {
+                onDelete: handleDelete
+              }
+            }
+          });
 
-    return (
-        <div className="ag-theme-alpine" style={{width: '100%' }}>
-            <AgGridReact
-            rowData={rowData}
-            columnDefs={columnDefs}
-            domLayout='autoHeight'
-            />
-      </div>
-    );
-}
+          setColumnDefs(columns);
+          setError(null);
+        }
+      })
+      .catch((error) => {
+        console.error('API Error:', error);
+        setError('Failed to fetch data');
+      });
+  }, [date, isDayShift, machineNo]);
+
+  const handleDelete = (row) => {
+    console.log('Delete button clicked for row:', row);
+    // Placeholder for API call and table refresh logic
+    // You will need to contact your API and then refresh the table
+  };
+
+  if (error) {
+    return <div><p>Machine data not available: {error}</p></div>;
+  }
+
+  return (
+    <div className="ag-theme-alpine" style={{ width: '100%' }}>
+      <AgGridReact
+        rowData={rowData}
+        columnDefs={columnDefs}
+        domLayout='autoHeight'
+      />
+    </div>
+  );
+};
