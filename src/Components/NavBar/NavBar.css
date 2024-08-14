@@ -17,7 +17,7 @@
     justify-content: center;
     flex-grow: 1;
     text-align: center; /* Center the text */
-    gap: 10px;
+    gap: 1rem;
     padding: 30px;
 }
 
@@ -26,8 +26,20 @@
 }
 
 .date-picker {
-    margin-top: 5px;
+    border: none;
+    background: none;
+    padding: 0;
+    font-size: 2rem;
+    color: rgb(36,69,152);
+    cursor: pointer;
+    width: 10rem;
 }
+
+.date-picker:hover {
+    color: rgb(22, 44, 101);
+    text-decoration: underline;
+}
+  
 
 .logo {
     max-width: 10%; /* Make the logo responsive */
