@@ -17,7 +17,7 @@ function App() {
           <Router>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/machine/:machineNo" element={<MachineSpecifics />} />
+              <Route path="/machine/:machineNo" element={<PrivateRoute element={<MachineSpecifics />} />} />
               <Route
                 path="/controlpanel"
                 element={<PrivateRoute element={<ControlPanel />} />}
