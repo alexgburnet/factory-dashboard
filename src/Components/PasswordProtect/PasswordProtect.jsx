@@ -16,7 +16,7 @@ const PasswordProtect = ({ children, onPasswordCorrect }) => {
     e.preventDefault();
     if (password === correctPassword) {
       onPasswordCorrect(); // Call the callback to set authentication
-      navigate('/controlpanel'); // Redirect to the intended protected route
+      navigate(location.pathname); // Redirect to the intended protected route
     } else {
       setError('Incorrect password');
     }
