@@ -2,8 +2,6 @@ import React, { createContext, useState } from "react";
 
 export const ShiftContext = createContext();
 
-
-
 export const ShiftProvider = ({ children }) => {
     const [isDayShift, setDayShift] = useState(true);
 
