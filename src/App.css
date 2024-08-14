@@ -9,3 +9,10 @@
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.15);
     padding: 0 20px; /* Add padding to provide space around the content */
 }
+
+@media print {
+    .header {
+        border: 1px solid rgb(230, 230, 230);
+        box-shadow: none;
+    }
+}
