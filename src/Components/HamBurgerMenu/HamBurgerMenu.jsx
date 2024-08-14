@@ -50,6 +50,7 @@ const HamBurgerMenu = () => {
           {isAuthenticated && (
           <div className="menu-item" onClick={() => {
             logout();
+            alert('You have been logged out');
             toggleMenu(); // Optionally close the menu on logout
           }}>
             <FaSignOutAlt className="icon" size={25} /> Log out
