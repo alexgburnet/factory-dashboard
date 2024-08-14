@@ -9,6 +9,7 @@ import { ShiftContext } from '../../ShiftContext';
 import API_URL from '../../config';
 
 import {formatDateToYYYYMMDD} from '../../utilities/dateUtils';
+import { MdChargingStation } from 'react-icons/md';
 
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
@@ -73,6 +74,7 @@ export const OverviewBarChart = () => {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             title: {
                 display: true,
@@ -109,9 +111,7 @@ export const OverviewBarChart = () => {
 
 
     return (
-        <div className='bar-chart-container'>
-            <Bar options={options} data={barChartData} className='bar-chart'/>
-        </div>
+        <Bar options={options} data={barChartData} className='bar-chart'/>
     );
 }
 
