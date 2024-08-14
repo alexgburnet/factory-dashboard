@@ -10,9 +10,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import { enGB } from "date-fns/locale";
 
 import { DateContext } from "../../DateContext";
-import { FaCog, FaHome } from 'react-icons/fa';
+import { FaBars, FaCog, FaHome, FaSignOutAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { DayNightToggle } from "../DayNightToggle/DayNightToggle";
+
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+
+import HamBurgerMenu from "../HamBurgerMenu/HamBurgerMenu";
 
 
 export const NavBar = () => {
@@ -31,14 +35,9 @@ export const NavBar = () => {
 
     return (
         <div className="header">
-          <Link to="/" className="navbar-link">
-            <FaHome className="icon" size={35} /> {/* Home icon */}
-          </Link>
 
-          <Link to="/controlpanel" className="navbar-link">
-            <FaCog className="icon" size={35} /> {/* Control Panel icon */}
-          </Link>
-    
+          <img src="/AburnetLogo.jpg" alt="ABurnet Logo" className="logo"/>
+
           <div className="center-container">
             <h1>{getHeaderTitle()} Overview for:</h1>
             <DatePicker
@@ -48,10 +47,10 @@ export const NavBar = () => {
               dateFormat="dd/MM/yyyy"  // British date format
               locale={enGB}            // British locale
             />
+            <DayNightToggle />
           </div>
           
-          <DayNightToggle />
-          <img src="/AburnetLogo.jpg" alt="ABurnet Logo" className="logo"/>
+          <HamBurgerMenu className="hamburger-menu"/>
 
         </div>
       );  
