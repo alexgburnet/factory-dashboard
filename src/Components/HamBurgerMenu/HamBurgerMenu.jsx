@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaBars, FaCog, FaHome, FaSignOutAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './HamBurgerMenu.css'; // Import your CSS file
 import { useAuth } from '../../AuthContext';
 
@@ -9,6 +9,7 @@ const HamBurgerMenu = () => {
   const menuRef = useRef(null);
   const iconRef = useRef(null);
   const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(prevState => !prevState);
@@ -34,6 +35,12 @@ const HamBurgerMenu = () => {
     }
   }, [isOpen]);
 
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+    toggleMenu(); // Optionally close the menu on logout
+  }
+
   return (
     <div className="hamburger-menu" ref={iconRef}>
       <div className="hamburger-icon" onClick={toggleMenu}>
@@ -48,11 +55,7 @@ const HamBurgerMenu = () => {
             <FaCog className="icon" size={25} /> Control Panel
           </Link>
           {isAuthenticated && (
-          <div className="menu-item" onClick={() => {
-            logout();
-            alert('You have been logged out');
-            toggleMenu(); // Optionally close the menu on logout
-          }}>
+          <div className="menu-item" onClick={handleLogout}>
             <FaSignOutAlt className="icon" size={25} /> Log out
           </div>)}
         </div>
