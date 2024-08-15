@@ -75,34 +75,50 @@ export const FaultReport = (props) => {
 
         // Check if there's existing data for each selected row
         selected.forEach(row => {
-            axios.get(`${API_URL}/api/getCorrectiveAction?date=${date}&machineNumber=${machineNo}&isDayShift=${isDayShift}&fault=${row['Fault']}`)
-                .then(response => {
-                    if (response.data) {
-                        // Store existing data
-                        setExistingData(prev => ({
-                            ...prev,
-                            [row['Fault']]: response.data
-                        }));
-                    }
-                })
-            .catch(error => {
-                console.error('Error fetching existing data:', error);
-            });
+            if (!existingData[row['Fault']]) { // Only fetch if data doesn't already exist
+                axios.get(`${API_URL}/api/getCorrectiveAction?date=${date}&machineNumber=${machineNo}&isDayShift=${isDayShift}&fault=${row['Fault']}`)
+                    .then(response => {
+                        if (response.data) {
+                            // Store existing data
+                            setExistingData(prev => ({
+                                ...prev,
+                                [row['Fault']]: response.data
+                            }));
+                        }
+                    })
+                .catch(error => {
+                    console.error('Error fetching existing data:', error);
+                });
+            }
         });
-
-        
     };
 
     const handleObservationChange = (index, event) => {
         const updatedRows = [...selectedRows];
         updatedRows[index].observation = event.target.value;
         setSelectedRows(updatedRows);
+        // Mark the row as modified by storing the change
+        setExistingData(prev => ({
+            ...prev,
+            [updatedRows[index]['Fault']]: {
+                ...prev[updatedRows[index]['Fault']],
+                observation: event.target.value
+            }
+        }));
     };
 
     const handleActionChange = (index, event) => {
         const updatedRows = [...selectedRows];
         updatedRows[index].action = event.target.value;
         setSelectedRows(updatedRows);
+        // Mark the row as modified by storing the change
+        setExistingData(prev => ({
+            ...prev,
+            [updatedRows[index]['Fault']]: {
+                ...prev[updatedRows[index]['Fault']],
+                action: event.target.value
+            }
+        }));
     };
 
     const handleSave = () => {
@@ -180,7 +196,7 @@ export const FaultReport = (props) => {
                                 <label>
                                     Observations:
                                     <textarea
-                                        value={row.observation || (existingData[row['Fault']]?.observation || '')}
+                                        value={row.observation !== undefined ? row.observation : (existingData[row['Fault']]?.observation || '')}
                                         onChange={(event) => handleObservationChange(index, event)}
                                         style={{ width: '100%', height: '50px', marginTop: '10px' }}
                                     />
@@ -190,7 +206,7 @@ export const FaultReport = (props) => {
                                 <label>
                                     Actions:
                                     <textarea
-                                        value={row.action || (existingData[row['Fault']]?.action || '')}
+                                        value={row.action !== undefined ? row.action : (existingData[row['Fault']]?.action || '')}
                                         onChange={(event) => handleActionChange(index, event)}
                                         style={{ width: '100%', height: '50px', marginTop: '10px' }}
                                     />
