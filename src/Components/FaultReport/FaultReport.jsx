@@ -191,7 +191,7 @@ export const FaultReport = (props) => {
                     {selectedRows.map((row, index) => (
                         <div key={index} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
                             <h4>Fault: {row['Fault']}</h4>
-                            <p>Percentage / Time: {row['Percentage / Time']}</p>
+                            <p>Percentage / Time: {row['percentage / time']}</p>
                             <div style={{ marginTop: '10px' }}>
                                 <label>
                                     Observations:
