@@ -69,7 +69,7 @@ export const ActionList = () => {
 
     return (
         <div className="action-list">
-            <h2>Action List</h2>
+            <h1>Actions to complete</h1>
             <div className="ag-theme-alpine" style={{ height: '45vh', width: '100%' }}>
                 <AgGridReact
                     rowData={actionList}
