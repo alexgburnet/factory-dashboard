@@ -122,33 +122,40 @@ export const FaultReport = (props) => {
     };
 
     const handleSave = () => {
+        if (selectedRows.length === 0) return; // No rows selected, no need to proceed
+    
         const reportData = {
             date: formatDateToYYYYMMDD(selectedDate),
             machineNumber: machineNo,
             isDayShift, // Include the shift information
             linearThread, // Include the checkbox state
-            faults: selectedRows.map(row => ({
-                fault: row['Fault'],
-                observation: row.observation || '',
-                action: row.action || '',
-            }))
+            faults: selectedRows.map(row => {
+                const faultId = row['Fault'];
+    
+                return {
+                    fault: faultId,
+                    observation: row.observation !== undefined ? row.observation : (existingData[faultId]?.observation || ''),
+                    action: row.action !== undefined ? row.action : (existingData[faultId]?.action || ''),
+                };
+            })
         };
-
+    
         axios.post(`${API_URL}/api/saveFaultReport`, reportData)
             .then(response => {
                 alert('Data saved successfully');
             })
-        .catch(error => {
-            console.error('There was an error saving the data!', error);
-            alert('Failed to save data');
-        });
-
+            .catch(error => {
+                console.error('There was an error saving the data!', error);
+                alert('Failed to save data');
+            });
+    
         // Save linear thread data
         axios.post(`${API_URL}/api/setLinearThread?date=${formatDateToYYYYMMDD(selectedDate)}&machineNumber=${machineNo}&isDayShift=${isDayShift}&linearThread=${linearThread}`)
-        .catch(error => {
-            console.error('Error saving linear thread data:', error);
-        });
+            .catch(error => {
+                console.error('Error saving linear thread data:', error);
+            });
     };
+    
 
     if (error) {
         return (
