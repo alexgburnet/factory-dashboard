@@ -79,6 +79,8 @@ export const FaultLog = (props) => {
     
     const date = row.Date;
 
+    console.log('Delete row:', row);
+
     axios.post(`${API_URL}/api/removeFault`, {
         machineNumber: machineNo,
         date: date
