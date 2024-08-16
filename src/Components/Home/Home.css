@@ -24,3 +24,10 @@
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
     position: relative;
 }
+
+@media print {
+    .chart-container, .action-list-container {
+        border: 1px solid rgb(230, 230, 230);
+        box-shadow: none;
+    }
+}
