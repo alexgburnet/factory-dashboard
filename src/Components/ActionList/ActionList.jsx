@@ -5,6 +5,8 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Using Alpine theme for Ag-Grid
 
+import './ActionList.css';
+
 import DeleteButton from '../DeleteButton/DeleteButton';
 
 const deleteButtonRenderer = (params) => {
@@ -70,7 +72,7 @@ export const ActionList = () => {
     return (
         <div className="action-list">
             <h1>Actions to complete</h1>
-            <div className="ag-theme-alpine" style={{ height: '45vh', width: '100%' }}>
+            <div className="ag-theme-alpine">
                 <AgGridReact
                     rowData={actionList}
                     columnDefs={columnDefs}
