@@ -31,8 +31,6 @@ export const OverviewBarChart = () => {
                 } else {
                     setOverviewData(response.data);
                     setError(null);
-                    console.log(response.data.machines.numbers);
-                    console.log(response.data.machines.percentRun);
                 }
             })
             .catch((error) => {
