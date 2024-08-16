@@ -13,7 +13,6 @@ export const MachineCardContainer = () => {
     useEffect(() => {
         axios.get(`${API_URL}/api/machineNumbers`)
             .then((response) => {
-                console.log(response.data);
                 setMachines(response.data);
             })
             .catch((error) => {
