@@ -2,8 +2,11 @@
     border: 2px solid rgb(230, 230, 230);
     border-radius: 20px;
     padding: 20px;
-    margin-bottom: 20px;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+.machine-card-container {
+  margin-bottom: 20px;
 }
 
 .machine-card:hover{
@@ -16,12 +19,10 @@
   }
   
   .data {
-    flex: 1; /* Take up all available space */
     max-width: 40%; 
   }
   
   .pie-chart {
-    flex: 1; /* Take up all available space */
     max-width: 60%; /* Limit the maximum width */
     height: auto; /* Allow height to adjust according to width */
     margin-left: 20px; /* Space between data and pie chart */
