@@ -76,14 +76,11 @@ export const FaultLog = (props) => {
   }
 
   const handleDelete = (row) => {
-    
-    const date = row.Date;
 
     console.log('Delete row:', row);
 
     axios.post(`${API_URL}/api/removeFault`, {
-        machineNumber: machineNo,
-        date: date
+        ID: row.ID
     }).then(fetchdata).catch((error) => {
         alert('Failed to delete record');
     });
