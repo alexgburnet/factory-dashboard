@@ -7,7 +7,7 @@ import API_URL from '../../config';
 
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css'; // Using Alpine theme for Ag-Grid
+import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import { formatDateToYYYYMMDD } from '../../utilities/dateUtils';
 
@@ -15,7 +15,7 @@ export const FaultReport = (props) => {
     const machineNo = props.machineNo;
 
     const { selectedDate } = useContext(DateContext);
-    const { isDayShift } = useContext(ShiftContext); // Shift context
+    const { isDayShift } = useContext(ShiftContext);
 
     const [machineData, setMachineData] = useState(null);
     const [error, setError] = useState(null);
@@ -30,6 +30,7 @@ export const FaultReport = (props) => {
     const date = formatDateToYYYYMMDD(selectedDate);
 
     useEffect(() => {
+        // Fetch fault report data from the API
         axios.get(`${API_URL}/api/faultReport?machineNumber=${machineNo}&date=${date}&shift=${isDayShift ? 'day' : 'night'}`)
             .then((response) => {
                 if (response.data.error) {
@@ -40,7 +41,6 @@ export const FaultReport = (props) => {
                     setError(null);
                     setMachineData(response.data);
                     setRowData(response.data.faultReport);
-
                     if (response.data.faultReport.length > 0) {
                         setColumnDefs(Object.keys(response.data.faultReport[0]).map((header) => {
                             return { field: header, flex: 1 };
@@ -122,18 +122,19 @@ export const FaultReport = (props) => {
     };
 
     const handleSave = () => {
-        if (selectedRows.length === 0) return; // No rows selected, no need to proceed
+        if (selectedRows.length === 0) return;
     
         const reportData = {
             date: formatDateToYYYYMMDD(selectedDate),
             machineNumber: machineNo,
-            isDayShift, // Include the shift information
-            linearThread, // Include the checkbox state
+            isDayShift,
+            linearThread,
             faults: selectedRows.map(row => {
                 const faultId = row['Fault'];
     
                 return {
                     fault: faultId,
+                    // Use the data in the fields if they've been modified, otherwise use the existing data
                     observation: row.observation !== undefined ? row.observation : (existingData[faultId]?.observation || ''),
                     action: row.action !== undefined ? row.action : (existingData[faultId]?.action || ''),
                 };

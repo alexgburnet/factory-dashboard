@@ -1,16 +1,14 @@
-import './OverviewBarChart.css';
-
-import {Bar} from 'react-chartjs-2';
-import {Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, plugins, scales, Ticks} from 'chart.js';
+import React, { useEffect, useState, useContext } from 'react';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip } from 'chart.js';
 import axios from 'axios';
-import {useEffect, useState, useContext} from 'react';
-import {DateContext} from '../../DateContext';
+
+import { DateContext } from '../../DateContext';
 import { ShiftContext } from '../../ShiftContext';
 import API_URL from '../../config';
+import { formatDateToYYYYMMDD } from '../../utilities/dateUtils';
 
-import {formatDateToYYYYMMDD} from '../../utilities/dateUtils';
-import { MdChargingStation } from 'react-icons/md';
-
+import './OverviewBarChart.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
@@ -24,6 +22,7 @@ export const OverviewBarChart = () => {
     const date = formatDateToYYYYMMDD(selectedDate);
 
     useEffect(() => {
+        // Fetch overview data from the API
         axios.get(`${API_URL}/api/overview?date=${date}&shift=${isDayShift ? 'day' : 'night'}`)
             .then((response) => {
                 if (response.data.error) {
@@ -48,6 +47,7 @@ export const OverviewBarChart = () => {
         return <div>Loading...</div>;
     }
 
+    // Colour of bar chart changes based on the value
     const getColor = (value) => {
         if (value >= 80) {
             return 'green';
@@ -78,7 +78,7 @@ export const OverviewBarChart = () => {
                 display: true,
                 text: "Percentage Running Time by Machine",
                 font: {
-                    size: 20, // Correct for Chart.js 3+
+                    size: 20, 
                 },
             },
             legend: {
@@ -92,14 +92,14 @@ export const OverviewBarChart = () => {
                 ticks: {
                     stepSize: 20,
                     font: {
-                        size: 15, // Correct for Chart.js 3+
+                        size: 15, 
                     },
                 },
             },
             x: {
                 ticks: {
                     font: {
-                        size: 17, // Correct for Chart.js 3+
+                        size: 17, 
                     },
                 },
             },

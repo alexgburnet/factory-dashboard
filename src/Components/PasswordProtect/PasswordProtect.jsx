@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../AuthContext';
+
 import passwords from '../../../passwords';
 
 import './PasswordProtect.css';
+
 
 const PasswordProtect = ({ children, onPasswordCorrect }) => {
   const [password, setPassword] = useState('');

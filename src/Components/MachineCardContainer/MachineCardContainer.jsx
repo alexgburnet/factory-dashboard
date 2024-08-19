@@ -1,16 +1,18 @@
-import './MachineCardContainer.css';
-
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import { MachineCard } from '../MachineCard/MachineCard';
 import API_URL from '../../config';
+
+import './MachineCardContainer.css';
 
 export const MachineCardContainer = () => {
 
     const [machines, setMachines] = useState([]);
 
     useEffect(() => {
+        // Fetch machine numbers from the API
         axios.get(`${API_URL}/api/machineNumbers`)
             .then((response) => {
                 setMachines(response.data);

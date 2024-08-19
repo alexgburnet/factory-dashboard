@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+
 import { DateContext } from '../../DateContext';
 import { ShiftContext } from '../../ShiftContext';
 import { FaultDataContext } from '../../FaultDataContext';
 import API_URL from '../../config';
-import './FaultLog.css';
-import DeleteButton from '../DeleteButton/DeleteButton';
-import { AgGridReact } from 'ag-grid-react';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { formatDateToYYYYMMDD } from '../../utilities/dateUtils';
-import { set } from 'date-fns';
+
+import DeleteButton from '../DeleteButton/DeleteButton';
+import './FaultLog.css';
+
 
 // Define a factory function for cellRenderer
 const deleteButtonRenderer = (params) => {
@@ -27,6 +29,7 @@ export const FaultLog = (props) => {
   const { selectedDate, setSelectedDate } = useContext(DateContext);
   const { isDayShift } = useContext(ShiftContext);
 
+  // Used to trigger a re-fetch of the fault report data after a deletion
   const { updateTime, setUpdateTime } = useContext(FaultDataContext);
 
   const [rowData, setRowData] = useState([]);
@@ -41,6 +44,7 @@ export const FaultLog = (props) => {
 
   const fetchdata = () => {
     setUpdateTime(new Date());
+    // Fetch fault log data from the API
     axios.get(`${API_URL}/api/faultLog?machineNumber=${machineNo}&date=${date}&shift=${isDayShift ? 'day' : 'night'}`)
       .then((response) => {
         if (response.data.error) {
@@ -53,6 +57,7 @@ export const FaultLog = (props) => {
             flex: 1
           }));
 
+          // Add a delete button column to the grid
           columns.push({
             headerName: 'Delete',
             field: 'delete',
@@ -77,8 +82,7 @@ export const FaultLog = (props) => {
 
   const handleDelete = (row) => {
 
-    console.log('Delete row:', row);
-
+    // Send a POST request to the API to delete the fault record
     axios.post(`${API_URL}/api/removeFault`, {
         ID: row.ID
     }).then(fetchdata).catch((error) => {

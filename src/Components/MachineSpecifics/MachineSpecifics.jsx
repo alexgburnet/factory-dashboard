@@ -1,17 +1,11 @@
-import './MachineSpecifics.css';
-
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { NavBar } from '../NavBar/NavBar';
-import axios from 'axios';
-import {DateContext} from '../../DateContext';
-import API_URL from '../../config';
 
-import { AgGridReact } from 'ag-grid-react';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css'; // Using Alpine theme for Ag-Grid
+import { NavBar } from '../NavBar/NavBar';
 import { FaultLog } from '../FaultLog/FaultLog';
 import { FaultReport } from '../FaultReport/FaultReport';
+
+import './MachineSpecifics.css';
 
 export const MachineSpecifics = () => {
     const { machineNo } = useParams();

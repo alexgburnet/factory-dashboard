@@ -1,4 +1,3 @@
-// DeleteButton.js
 import React from 'react';
 
 const DeleteButton = (props) => {

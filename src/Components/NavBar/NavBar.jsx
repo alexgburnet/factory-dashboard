@@ -1,17 +1,15 @@
-import "./NavBar.css";
-
-import React, { useState, useContext } from "react";
-import DatePicker from "react-datepicker";
+import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { enGB } from "date-fns/locale";
+
 import { DateContext } from "../../DateContext";
-import { FaBars, FaCog, FaHome, FaSignOutAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { DayNightToggle } from "../DayNightToggle/DayNightToggle";
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import HamBurgerMenu from "../HamBurgerMenu/HamBurgerMenu";
-import { format } from 'date-fns'; // Import format from date-fns
+
+import "./NavBar.css";
+
 
 export const NavBar = () => {
     const { selectedDate, setSelectedDate } = useContext(DateContext);
@@ -24,8 +22,6 @@ export const NavBar = () => {
             return `Machine ${location.pathname.split("/")[2]}`;
         }
     };
-
-    const formattedDate =format(selectedDate, 'dd/MM/yyyy');
 
     return (
         <div className="header">

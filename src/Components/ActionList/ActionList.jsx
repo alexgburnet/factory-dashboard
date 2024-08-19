@@ -5,13 +5,11 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Using Alpine theme for Ag-Grid
 
-import {formatDateToYYYYMMDD} from '../../utilities/dateUtils';
-
 import './ActionList.css';
 
 import DeleteButton from '../DeleteButton/DeleteButton';
-import { format } from 'date-fns';
 
+// factory function for cellRenderer - delete buttons at right of table
 const deleteButtonRenderer = (params) => {
     return (
       <DeleteButton
@@ -23,7 +21,10 @@ const deleteButtonRenderer = (params) => {
 
 export const ActionList = () => {
     const [actionList, setActionList] = useState([]);
-    const [updateTime, setUpdateTime] = useState(new Date());
+    
+    // stores the latest date of an update to the action list i.e. a completion.
+    // This is used to trigger a re-fetch of the action list data
+    const [updateTime, setUpdateTime] = useState(new Date()); 
 
     useEffect(() => {
         // Fetch data from API

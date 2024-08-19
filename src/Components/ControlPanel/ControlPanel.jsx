@@ -1,9 +1,12 @@
-import API_URL from '../../config';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './ControlPanel.css';
-import { FaCog, FaHome } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+import API_URL from '../../config';
+
+import './ControlPanel.css';
+
 
 export const ControlPanel = () => {
     const [operators, setOperators] = useState([]);
@@ -13,8 +16,7 @@ export const ControlPanel = () => {
     const [selectedShift, setSelectedShift] = useState('day');
     const [selectedMachines, setSelectedMachines] = useState([]);
 
-    const [machineData, setMachineData] = useState(null);
-
+    // Fetch operator list for dropdown menu
     useEffect(() => {
         axios.get(`${API_URL}/api/operators`)
             .then((response) => {
@@ -29,6 +31,7 @@ export const ControlPanel = () => {
             });
     }, []);
 
+    // Fetch machine numbers for checkbox list
     useEffect(() => {
         axios.get(`${API_URL}/api/machineNumbers`)
             .then((response) => {

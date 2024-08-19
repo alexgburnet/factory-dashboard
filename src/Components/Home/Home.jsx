@@ -1,9 +1,9 @@
-import './Home.css';
-
 import { NavBar } from '../NavBar/NavBar';
 import { OverviewBarChart } from '../OverviewBarChart/OverviewBarChart';
 import { MachineCardContainer } from '../MachineCardContainer/MachineCardContainer';
 import { ActionList } from '../ActionList/ActionList';
+
+import './Home.css';
 
 export const Home = () => {
   return (

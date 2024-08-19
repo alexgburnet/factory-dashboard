@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import './DayNightToggle.css'; // Import CSS file for styles
 import { ShiftContext } from '../../ShiftContext';
+
+import './DayNightToggle.css';
 
 export const DayNightToggle = () => {
   const { isDayShift, setDayShift } = useContext(ShiftContext);

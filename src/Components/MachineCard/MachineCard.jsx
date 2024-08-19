@@ -1,19 +1,17 @@
-import './MachineCard.css'
-
-import {Pie} from 'react-chartjs-2';
-import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
+import React, { useEffect, useState, useContext } from 'react';
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import axios from 'axios';
+
 import API_URL from '../../config';
-
-import {useEffect, useState, useContext} from 'react';
-
-import {DateContext} from '../../DateContext';
+import { DateContext } from '../../DateContext';
 import { ShiftContext } from '../../ShiftContext';
+import { formatDateToYYYYMMDD } from '../../utilities/dateUtils';
+
+import './MachineCard.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-import {formatDateToYYYYMMDD} from '../../utilities/dateUtils';
-import { set } from 'date-fns';
 
 export const MachineCard = (props) => {
 
@@ -22,11 +20,12 @@ export const MachineCard = (props) => {
     const [accountableKnitter, setAccountableKnitter] = useState(null);
 
     const { selectedDate } = useContext(DateContext);
-    const {isDayShift} = useContext(ShiftContext);
+    const { isDayShift } = useContext(ShiftContext);
 
     const date = formatDateToYYYYMMDD(selectedDate);
 
     useEffect(() => {
+        // Fetch machine data from the API
         axios.get(`${API_URL}/api/machineCard?machineNumber=${props.machine}&date=${date}&shift=${isDayShift ? 'day' : 'night'}`)
             .then((response) => {
                 if (response.data.error) {
@@ -50,12 +49,14 @@ export const MachineCard = (props) => {
     }, [selectedDate, isDayShift]);
 
     useEffect(() => {
+        // Fetch accountable knitter data from the API
         axios.get(`${API_URL}/api/checkAccountableKnitter?date=${date}&shift=${isDayShift ? 'day' : 'night'}&machines=${props.machine}`)
             .then((response) => {
                 const data = response.data;
                 if (data["-1"]) {
                     setAccountableKnitter(data["-1"]); // No knitter found
                 } else {
+                    // Get the knitter assigned to the machine number, if none is assigned, set to "Not Assigned"
                     const knitter = Object.keys(data).length ? `${data[props.machine]}` : "Not Assigned";
                     setAccountableKnitter(knitter);
                 }

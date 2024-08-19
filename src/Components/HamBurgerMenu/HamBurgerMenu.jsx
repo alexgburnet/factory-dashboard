@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaBars, FaCog, FaHome, FaSignOutAlt } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import './HamBurgerMenu.css'; // Import your CSS file
+
 import { useAuth } from '../../AuthContext';
+
+import './HamBurgerMenu.css'; // Import your CSS file
 
 const HamBurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);

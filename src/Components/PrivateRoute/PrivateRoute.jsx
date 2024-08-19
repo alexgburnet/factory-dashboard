@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import {  useLocation } from 'react-router-dom';
+
 import { useAuth } from '../../AuthContext';
 import PasswordProtect from '../PasswordProtect/PasswordProtect';
 
