@@ -77,15 +77,17 @@ export const ActionList = () => {
     return (
         <div className="action-list">
             <h1>Actions to complete</h1>
-            <div className="ag-theme-alpine">
-                <AgGridReact
-                    rowData={actionList}
-                    columnDefs={columnDefs}
-                    defaultColDef={{ sortable: true, resizable: true }}
-                    suppressRowTransform={true}
-                    supressCellSelection={true}
-                    onFirstDataRendered={(params) => params.api.sizeColumnsToFit()}
-                />
+            <div className='action-list-table-container'>
+                <div className="ag-theme-alpine">
+                    <AgGridReact
+                        rowData={actionList}
+                        columnDefs={columnDefs}
+                        defaultColDef={{ sortable: true, resizable: true }}
+                        suppressRowTransform={true}
+                        supressCellSelection={true}
+                        onFirstDataRendered={(params) => params.api.sizeColumnsToFit()}
+                    />
+                </div>
             </div>
         </div>
     );

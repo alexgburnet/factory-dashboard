@@ -4,8 +4,13 @@
 }
 
 .ag-theme-alpine {
-    height: 45vh;
+    height: 100%;
     width: 100%
+}
+
+.action-list-table-container {
+    height: 45vh;
+    width: 100%;
 }
 
 @media print {
