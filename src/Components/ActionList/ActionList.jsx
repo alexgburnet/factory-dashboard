@@ -5,9 +5,12 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Using Alpine theme for Ag-Grid
 
+import {formatDateToYYYYMMDD} from '../../utilities/dateUtils';
+
 import './ActionList.css';
 
 import DeleteButton from '../DeleteButton/DeleteButton';
+import { format } from 'date-fns';
 
 const deleteButtonRenderer = (params) => {
     return (
@@ -38,8 +41,10 @@ export const ActionList = () => {
     }, [updateTime]);
 
     const handleDelete = (row) => {
-        console.log('Delete row:', row);
-        axios.post(`${API_URL}/api/completeAction`, {id: row.id}).catch((error) => {
+        const date = new Date();
+        console.log('Date:', formatCompletedDate(date));
+        console.log('Date:', formatCompletedDate(date));
+        axios.post(`${API_URL}/api/completeAction`, {id: row.id, date: formatCompletedDate(date)}).catch((error) => {
             console.error(error);
         }).then(() => {
             setUpdateTime(new Date());
@@ -85,3 +90,17 @@ export const ActionList = () => {
         </div>
     );
 };
+
+function formatCompletedDate(date) {
+    
+    let year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+    let hours = date.getHours().toString().padStart(2, '0');
+    let minutes = date.getMinutes().toString().padStart(2, '0');
+    let seconds = date.getSeconds().toString().padStart(2, '0');
+
+    // Combine into the desired format
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+}
