@@ -49,3 +49,9 @@
 > e.g. noticed many faults in xxx needle location
 - Input an action
 > e.g. replace the tongue in xxx needle location
+
+### Assigning operators to a machine for a shift
+
+- Get here by clicking the hamburger menu => Control Panel
+
+![controlpanel](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/controlpanel.png)
