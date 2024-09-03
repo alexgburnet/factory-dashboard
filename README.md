@@ -4,7 +4,9 @@
 
 ### Machine Efficiency Bar Chart:
 
-![barchart](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/barchart.png)
+<p align="center">
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/barchart.png" alt="bar chart" width="500"/>
+</p>
 
 - Shows the machine efficiencies for a given shift.
 - If that is the current shift, then the total hours is scaled appropriately to be current time - shift start
@@ -12,28 +14,36 @@
 
 ### Action List:
 
-![barchart](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/actionlist.png)
+<p align="center">
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/actionlist.png" alt="action list" width="500"/>
+</p>
 
 - Actions to be completed after entered in from the fault reports.
 - Should be reviewed daily to ensure it is being kept on top of
 
 ### Machine cards:
 
-![barchart](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/machinecards.png)
+<p align="center">
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/machinecards.png" alt="machine cards" width="500"/>
+</p>
 
 - Visually shows thebreakdown of what is causing the most faults for each machine
 - Shows the assigned operator
 
 ### Fault log
 
-![faultlog](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/faultlog.png)
+<p align="center">
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/faultlog.png" alt="fault log" width="500"/>
+</p>
 
 - Accessed by selecting the machine card for the desired machine frm the home page
 - simply displays the faults for that machine for that shift in chronological order
 
 ### Fault Report
 
-![faultreport](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/faultreport.png)
+<p align="center">
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/faultreport.png" alt="fault report" width="500"/>
+</p>
 
 - Accessed in the same place as fault log
 - Collects faults together and displays the total down time by fault, and also what percentage of the total downtime was caused by this fault
@@ -41,7 +51,9 @@
 
 ### Adding Actions
 
-![actions](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/setaction.png)
+<p align="center">
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/setaction.png" alt="set actions" width="500"/>
+</p>
 
 - Select on a particular fault within the fault report to open action form.
 - Input whether the machine is threaded linearly and correctly to spec sheet
