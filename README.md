@@ -5,7 +5,7 @@
 ### Machine Efficiency Bar Chart:
 
 <p align="center">
-  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/barchart.png" alt="bar chart" width="500"/>
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/barchart.png" alt="bar chart" width="800"/>
 </p>
 
 - Shows the machine efficiencies for a given shift.
@@ -15,7 +15,7 @@
 ### Action List:
 
 <p align="center">
-  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/actionlist.png" alt="action list" width="500"/>
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/actionlist.png" alt="action list" width="800"/>
 </p>
 
 - Actions to be completed after entered in from the fault reports.
@@ -24,7 +24,7 @@
 ### Machine cards:
 
 <p align="center">
-  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/machinecards.png" alt="machine cards" width="500"/>
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/machinecards.png" alt="machine cards" width="800"/>
 </p>
 
 - Visually shows thebreakdown of what is causing the most faults for each machine
@@ -33,7 +33,7 @@
 ### Fault log
 
 <p align="center">
-  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/faultlog.png" alt="fault log" width="500"/>
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/faultlog.png" alt="fault log" width="800"/>
 </p>
 
 - Accessed by selecting the machine card for the desired machine frm the home page
@@ -42,7 +42,7 @@
 ### Fault Report
 
 <p align="center">
-  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/faultreport.png" alt="fault report" width="500"/>
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/faultreport.png" alt="fault report" width="800"/>
 </p>
 
 - Accessed in the same place as fault log
@@ -52,7 +52,7 @@
 ### Adding Actions
 
 <p align="center">
-  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/setaction.png" alt="set actions" width="500"/>
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/setaction.png" alt="set actions" width="800"/>
 </p>
 
 - Select on a particular fault within the fault report to open action form.
@@ -66,4 +66,6 @@
 
 - Get here by clicking the hamburger menu => Control Panel
 
-![controlpanel](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/controlpanel.png)
+<p align="center">
+  <img src="https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/controlpanel.png" alt="Control Panel" width="800"/>
+</p>
