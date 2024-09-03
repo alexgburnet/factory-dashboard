@@ -2,9 +2,7 @@
 
 ## v1.0
 
-### Home
-
-Machine Efficiency Bar Chart:
+### Machine Efficiency Bar Chart:
 
 ![barchart](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/barchart.png)
 
@@ -12,28 +10,28 @@ Machine Efficiency Bar Chart:
 - If that is the current shift, then the total hours is scaled appropriately to be current time - shift start
 - Efficiency is calculated by total shift time - sum of fault down time / total shft time
 
-Action List:
+### Action List:
 
 ![barchart](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/actionlist.png)
 
 - Actions to be completed after entered in from the fault reports.
 - Should be reviewed daily to ensure it is being kept on top of
 
-Machine cards:
+### Machine cards:
 
 ![barchart](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/machinecards.png)
 
 - Visually shows thebreakdown of what is causing the most faults for each machine
 - Shows the assigned operator
 
-Fault log
+### Fault log
 
 ![faultlog](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/faultlog.png)
 
 - Accessed by selecting the machine card for the desired machine frm the home page
 - simply displays the faults for that machine for that shift in chronological order
 
-Fault Report
+### Fault Report
 
 ![faultreport](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/faultreport.png)
 
@@ -41,7 +39,7 @@ Fault Report
 - Collects faults together and displays the total down time by fault, and also what percentage of the total downtime was caused by this fault
 - Can be sorted by highest percentage when header is clicked
 
-Adding Actions
+### Adding Actions
 
 ![actions](https://github.com/alexgburnet/factory-dashboard/blob/main/README%20images/setaction.png)
 
